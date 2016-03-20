@@ -98,6 +98,7 @@
       var windowLoadFunction = function windowLoadFunction() {
         if (that.initialized) {
           that._setSizes();
+          that._checkPosition();
         } else {
           setTimeout(function () {
             windowLoadFunction();

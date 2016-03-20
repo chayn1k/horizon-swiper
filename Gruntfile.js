@@ -2,6 +2,13 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    banner: '/*!\n' +
+            ' * Horizon Swiper\n' +
+            ' * Version <%= pkg.version %>\n' +
+            ' * Domain ( http://horizon-swiper.sebsauer.de/ )\n' +
+            ' * Copyright 2015 <%= pkg.author %>\n' +
+            ' * Licensed under MIT ( https://github.com/sebsauer90/horizon-swiper/blob/master/LICENSE )\n' +
+            ' */',
 
     /* Sass compiler Task */
     sass: {
@@ -75,20 +82,44 @@ module.exports = function (grunt) {
           'dist/horizon-swiper.min.js': ['src/horizon-swiper.js']
         }
       }
+    },
+
+    usebanner: {
+      dist: {
+        options: {
+          position: 'top',
+          banner: '<%= banner %>',
+          linebreak: true
+        },
+        files: {
+          src: [ 'dist/*.{css,js}' ]
+        }
+      },
+      last_line: {
+        options: {
+          position: 'bottom',
+          banner: '\n',
+          linebreak: false
+        },
+        files: {
+          src: [ 'dist/*.{css,js}' ]
+        }
+      }
     }
 
   });
 
 
   /* Load plugins */
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-babel');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-banner');
 
   /* Tasks  */
-  grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'babel', 'uglify']);
+  grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'babel', 'uglify', 'usebanner']);
   grunt.registerTask('css', ['sass', 'autoprefixer', 'cssmin']);
   grunt.registerTask('js', ['babel', 'uglify']);
 

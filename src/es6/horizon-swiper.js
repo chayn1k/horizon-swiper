@@ -99,6 +99,7 @@
       var windowLoadFunction = function () {
         if ( that.initialized ) {
           that._setSizes();
+          that._checkPosition();
         } else {
           setTimeout( () => {
             windowLoadFunction();
@@ -556,7 +557,7 @@
       } else if ( innerOffset <= 0 ) {
         that.$element.addClass( defaults.firstItemClass );
         that.$arrowPrev.attr( 'disabled', 'disabled' );
-        that.$element.removeClass( defaults.lastItemClass )
+        that.$element.removeClass( defaults.lastItemClass );
         that.$arrowNext.removeAttr( 'disabled' );
       } else {
         that.$element

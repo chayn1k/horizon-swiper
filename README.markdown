@@ -1,5 +1,5 @@
 # Horizon Swiper
-#### Version 1.1.1
+#### Version 1.1.2
 
 You will love this light (~ 7kb) free swiper.
 It comes with many options and it works with your simple native browser scrolling.
